@@ -1,4 +1,5 @@
 ﻿using libraryWeb;
+using libraryWeb.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -32,16 +33,16 @@ public class AuthorsController : ControllerBase
     }
 
     // Получить все книги по автору
-    [HttpGet("{id}/books")]
-    public async Task<IActionResult> GetBooksByAuthor(int id)
-    {
-        var author = await _unitOfWork.Authors.GetAuthorByIdAsync(id);
-        if (author == null)
-            return NotFound("Author not found");
+    //[HttpGet("{id}/books")]
+    //public async Task<IActionResult> GetBooksByAuthor(int id)
+    //{
+    //    var author = await _unitOfWork.Authors.GetAuthorByIdAsync(id);
+    //    if (author == null)
+    //        return NotFound("Author not found");
 
-        var books = await _unitOfWork.Books.GetBooksByAuthorIdAsync(id);
-        return Ok(books);
-    }
+    //    var books = await _unitOfWork.Books.GetBooksByAuthorIdAsync(id);
+    //    return Ok(books);
+    //}
 
     // Добавить нового автора
     [HttpPost]
@@ -70,7 +71,7 @@ public class AuthorsController : ControllerBase
             return NotFound();
 
         existingAuthor.Name = author.Name;
-        existingAuthor.LName = author.LName;
+        existingAuthor.Surname = author.Surname;
         existingAuthor.Birthday = author.Birthday;
         existingAuthor.Country = author.Country;
 
